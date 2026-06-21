@@ -14,8 +14,8 @@ climb the **global daily leaderboard**.
 
 - **Daily puzzle** — the same Minion for everyone each day (deterministic, date-seeded).
 - **Photo at the top** — real Minion artwork sourced from the Despicable Me wiki and self-hosted.
-- **5 guesses** with a Wordle-style feedback grid (Eyes / Height / Hair / Debut),
-  including ⬆ / ⬇ height hints.
+- **5 guesses** shown as a Wordle-style grid of boxes (Eyes / Height / Hair) that
+  turn green where the trait matches.
 - **Smart autocomplete** — start typing and pick from the top matches; you can only
   submit a Minion that exists in the roster.
 - **Win screen** with your time, guess count (X/5), and **rank on the global leaderboard**.

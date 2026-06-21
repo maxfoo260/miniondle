@@ -10,12 +10,10 @@
   // directly instead of a doomed request that just logs a console error.
   const HAS_BACKEND = !/\.github\.io$/.test(location.hostname) &&
                       location.protocol !== "file:";
-  const HEIGHT_ORDER = { Short: 0, Medium: 1, Tall: 2 };
   const TRAITS = [
     { key: "eyes",   label: "Eyes" },
-    { key: "height", label: "Height", ordered: true },
+    { key: "height", label: "Height" },
     { key: "hair",   label: "Hair" },
-    { key: "debut",  label: "Debut" },
   ];
 
   // ---------- State ----------
@@ -118,25 +116,29 @@
     return st;
   }
 
-  // ---------- Comparison ----------
-  function compareTrait(trait, guess) {
-    const gv = guess[trait.key];
-    const av = answer[trait.key];
-    const correct = gv === av;
-    let arrow = "";
-    if (!correct && trait.ordered) {
-      const d = HEIGHT_ORDER[av] - HEIGHT_ORDER[gv];
-      arrow = d > 0 ? "⬆" : "⬇";
-    }
-    return { value: gv, correct, arrow };
-  }
-
   // ---------- Rendering ----------
   function renderBoard() {
     boardEl.innerHTML = "";
-    state.guesses.forEach((gid) => boardEl.appendChild(buildRow(byId[gid])));
-    const left = MAX_GUESSES - state.guesses.length;
-    guessesLeftEl.textContent = Math.max(0, left);
+    for (let i = 0; i < MAX_GUESSES; i++) {
+      if (i < state.guesses.length) boardEl.appendChild(buildRow(byId[state.guesses[i]]));
+      else boardEl.appendChild(buildEmptyRow());
+    }
+    guessesLeftEl.textContent = Math.max(0, MAX_GUESSES - state.guesses.length);
+  }
+
+  function buildEmptyRow() {
+    const row = document.createElement("div");
+    row.className = "guess-row";
+    const minionCell = document.createElement("div");
+    minionCell.className = "cell cell-minion cell-empty";
+    minionCell.innerHTML = `<span class="cm-name cm-placeholder">?</span>`;
+    row.appendChild(minionCell);
+    TRAITS.forEach(() => {
+      const cell = document.createElement("div");
+      cell.className = "cell cell-empty";
+      row.appendChild(cell);
+    });
+    return row;
   }
 
   function buildRow(guess) {
@@ -145,37 +147,17 @@
 
     const minionCell = document.createElement("div");
     minionCell.className = "cell cell-minion";
-    minionCell.innerHTML =
-      `<img src="${guess.img}" alt="${guess.name}" loading="lazy">` +
-      `<span class="cm-name">${guess.name}</span>`;
+    minionCell.innerHTML = `<span class="cm-name">${guess.name}</span>`;
     row.appendChild(minionCell);
 
     TRAITS.forEach((trait) => {
-      const r = compareTrait(trait, guess);
+      const correct = guess[trait.key] === answer[trait.key];
       const cell = document.createElement("div");
-      cell.className = "cell " + (r.correct ? "correct" : "wrong");
-      const val = trait.key === "debut" ? shortDebut(r.value) : r.value;
-      cell.innerHTML = `<span>${val}</span>` +
-        (r.arrow ? `<span class="cell-arrow">${r.arrow}</span>` : "");
+      cell.className = "cell " + (correct ? "correct" : "wrong");
+      cell.innerHTML = `<span>${guess[trait.key]}</span>`;
       row.appendChild(cell);
     });
     return row;
-  }
-
-  function shortDebut(d) {
-    // "Despicable Me 2 (2013)" -> "DM2 '13" style for compact cell
-    const m = d.match(/\((\d{4})\)/);
-    const year = m ? "’" + m[1].slice(2) : "";
-    let name = d.replace(/\s*\(\d{4}\)/, "").trim();
-    const map = {
-      "Despicable Me": "DM",
-      "Despicable Me 2": "DM2",
-      "Despicable Me 3": "DM3",
-      "Despicable Me 4": "DM4",
-      "Minions": "Minions",
-      "Minions: The Rise of Gru": "Rise of Gru",
-    };
-    return `${map[name] || name} ${year}`.trim();
   }
 
   // ---------- Autocomplete ----------
@@ -211,9 +193,8 @@
       li.setAttribute("role", "option");
       li.dataset.id = m.id;
       li.innerHTML =
-        `<img src="${m.img}" alt="">` +
-        `<div><div class="s-name">${m.name}</div>` +
-        `<div class="s-sub">${already ? "Already guessed" : m.eyes + " eye" + (m.eyes === "Two" ? "s" : "") + " · " + m.height + " · " + m.hair}</div></div>`;
+        `<span class="s-name">${m.name}</span>` +
+        (already ? `<span class="s-sub">Already guessed</span>` : "");
       if (!already) {
         li.addEventListener("click", () => pickSuggestion(m.id));
         suggestionIds.push(m.id);
@@ -246,7 +227,10 @@
     suggestionsEl.innerHTML = "";
     renderSuggestions();
 
-    boardEl.appendChild(buildRow(byId[id]));
+    const idx = state.guesses.length - 1;
+    const newRow = buildRow(byId[id]);
+    if (boardEl.children[idx]) boardEl.replaceChild(newRow, boardEl.children[idx]);
+    else boardEl.appendChild(newRow);
     guessesLeftEl.textContent = Math.max(0, MAX_GUESSES - state.guesses.length);
 
     const won = id === answer.id;
@@ -329,7 +313,6 @@
     $("resultImg").src = answer.img;
     $("resultImg").alt = answer.name;
     $("resultName").textContent = answer.name;
-    $("resultDebut").textContent = "Debut: " + answer.debut;
     $("rGuesses").textContent = won ? `${guessCount}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`;
     $("rTime").textContent = won ? fmtTime(timeMs) : "—";
 
