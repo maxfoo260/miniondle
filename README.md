@@ -4,9 +4,9 @@ A daily **Despicable Me** Minion guessing game — Wordle, but for Minions.
 
 Every calendar day a new mystery Minion appears at the top of the page. Study the
 photo and figure out **which named Minion it is** in **5 guesses or fewer**. Each
-guess shows how it compares to the answer across **Eyes**, **Height**, **Hair**, and
-**Debut film** — matching traits turn 🟩 green. Solve it fast and in few guesses to
-climb the **global daily leaderboard**.
+guess shows how it compares to the answer across **Eyes**, **Height** and **Hair** —
+matching traits turn 🟩 green. Solve it fast and in few guesses to climb the
+**global daily leaderboard** — or switch to **Unlimited** mode and play forever.
 
 ![Miniondle](assets/minions/kevin.webp)
 
