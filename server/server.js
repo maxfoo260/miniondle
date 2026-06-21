@@ -9,12 +9,24 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { URL } = require("url");
 
 const ROOT = path.resolve(__dirname, "..");
 const DATA_DIR = path.join(__dirname, "data");
 const SCORES_FILE = path.join(DATA_DIR, "scores.json");
 const PORT = process.env.PORT || 3000;
+
+// Refresh password is NEVER stored in plaintext — only this salted SHA-256 hash.
+// Verified server-side so the password can't be recovered from the code.
+const REFRESH_SALT = "miniondle-refresh-v1::";
+const REFRESH_HASH = "9a03bf08105620dbf88cb2541e190e99154d0dff989664e736a3bffdc5e2dd9c";
+function checkRefreshPassword(pw) {
+  const got = crypto.createHash("sha256").update(REFRESH_SALT + String(pw || "")).digest("hex");
+  const a = Buffer.from(got, "hex");
+  const b = Buffer.from(REFRESH_HASH, "hex");
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
 
 // ---------- storage ----------
 fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -150,6 +162,19 @@ async function handleScore(req, res) {
   return sendJSON(res, 200, rankFor(puzzleId, playerId));
 }
 
+async function handleRefreshAuth(req, res) {
+  let payload;
+  try {
+    payload = JSON.parse(await readBody(req));
+  } catch {
+    return sendJSON(res, 400, { ok: false, error: "invalid json" });
+  }
+  if (checkRefreshPassword(payload.password)) {
+    return sendJSON(res, 200, { ok: true });
+  }
+  return sendJSON(res, 401, { ok: false });
+}
+
 function handleLeaderboard(res, puzzleId) {
   const board = scores[puzzleId] || {};
   const entries = Object.values(board);
@@ -184,6 +209,9 @@ const server = http.createServer(async (req, res) => {
     const pid = String(parseInt(url.searchParams.get("puzzleId"), 10));
     if (pid === "NaN") return sendJSON(res, 400, { error: "missing puzzleId" });
     return handleLeaderboard(res, pid);
+  }
+  if (url.pathname === "/api/refresh-auth" && req.method === "POST") {
+    return handleRefreshAuth(req, res);
   }
   if (url.pathname === "/api/health") {
     return sendJSON(res, 200, { ok: true, puzzles: Object.keys(scores).length });

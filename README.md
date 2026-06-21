@@ -63,6 +63,18 @@ Scores persist to `server/data/scores.json`. The store keeps each player's **bes
 attempt per puzzle. For a high-traffic deployment, swap the JSON file for a database
 (the `scoreValue` / `rankFor` helpers in `server/server.js` are the only ranking logic).
 
+## Refreshing a puzzle (password protected)
+
+There's a hidden command to reset the current day's puzzle and replay it:
+
+- Type the secret command **`ap`**, or press **Ctrl/Cmd + Alt + P**, to open the password menu.
+- Enter the password to wipe today's progress and start fresh.
+
+The password is **never stored in plaintext**. The backend keeps only a salted
+SHA‑256 hash and verifies the entry server-side (`POST /api/refresh-auth`), so it
+can't be recovered from the source. On a static host with no backend, the same
+salted-hash check runs client-side (still only the hash, never the password).
+
 ## The roster
 
 23 named Minions across the films (Kevin, Stuart, Bob, Dave, Carl, Jerry, Tim, Mark,

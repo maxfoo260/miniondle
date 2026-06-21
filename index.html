@@ -115,6 +115,20 @@
     </div>
   </div>
 
+  <!-- Refresh (password) modal -->
+  <div id="refreshModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="refreshTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close aria-label="Close">×</button>
+      <h2 id="refreshTitle" class="modal-h">Refresh puzzle</h2>
+      <p class="muted">Enter the password to reset today's puzzle and play it again from scratch.</p>
+      <form id="refreshForm" class="refresh-form" autocomplete="off">
+        <input id="refreshPw" type="password" autocomplete="off" placeholder="Password" aria-label="Password" />
+        <button type="submit" class="share-btn refresh-submit">Unlock &amp; refresh</button>
+      </form>
+      <p id="refreshMsg" class="refresh-msg hidden"></p>
+    </div>
+  </div>
+
   <footer class="footer">
     <p class="made-by">Made by Max Sundue</p>
     <p>Minions &amp; Despicable Me are © Universal/Illumination. Not affiliated.</p>

@@ -337,6 +337,17 @@ body {
 .footer { text-align: center; padding: 16px; color: #999; font-size: 11px; }
 .footer .made-by { color: #444; font-size: 14px; font-weight: 800; margin: 0 0 4px; }
 
+/* Refresh password modal */
+.refresh-form { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+#refreshPw {
+  padding: 13px 14px; font-size: 16px;
+  border: 2px solid var(--line); border-radius: 10px; outline: none;
+}
+#refreshPw:focus { border-color: var(--overall-blue); }
+.refresh-msg { text-align: center; font-weight: 700; margin: 12px 0 0; }
+.refresh-msg.err { color: #c0392b; }
+.refresh-msg.ok { color: var(--correct-deep); }
+
 .hidden { display: none !important; }
 
 /* Responsive */

@@ -417,6 +417,71 @@
   function openModal(id) { $(id).classList.remove("hidden"); }
   function closeModal(el) { el.classList.add("hidden"); }
 
+  // ---------- Refresh (password protected) ----------
+  // The password is verified by the backend against a salted hash, so the plaintext
+  // never appears in the code. On a static host (no backend) we fall back to the same
+  // salted SHA-256 check client-side — still only the hash, never the password.
+  const REFRESH_SALT = "miniondle-refresh-v1::";
+  const REFRESH_HASH = "9a03bf08105620dbf88cb2541e190e99154d0dff989664e736a3bffdc5e2dd9c";
+
+  async function sha256Hex(str) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  }
+  async function verifyRefreshPassword(pw) {
+    if (HAS_BACKEND) {
+      try {
+        const res = await fetch(`${API_BASE}/api/refresh-auth`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: pw }),
+        });
+        const data = await res.json().catch(() => ({}));
+        return res.ok && data.ok === true;
+      } catch { /* fall back to client-side hash check below */ }
+    }
+    try { return (await sha256Hex(REFRESH_SALT + pw)) === REFRESH_HASH; }
+    catch { return false; }
+  }
+
+  function openRefresh() {
+    $("refreshPw").value = "";
+    const msg = $("refreshMsg"); msg.className = "refresh-msg hidden"; msg.textContent = "";
+    openModal("refreshModal");
+    setTimeout(() => $("refreshPw").focus(), 50);
+  }
+
+  function doRefresh() {
+    try { localStorage.removeItem(stateKey(puzzleId)); } catch {}
+    state = { guesses: [], status: "playing", startTime: null, endTime: null };
+    selectedId = null;
+    clearInterval(countdownTimer);
+    closeModal($("resultModal"));
+    input.disabled = false;
+    input.value = "";
+    suggestionsEl.innerHTML = "";
+    suggestionIds = [];
+    renderBoard();
+    updateGuessBtn();
+    input.focus();
+  }
+
+  async function submitRefresh(e) {
+    e.preventDefault();
+    const pw = $("refreshPw").value;
+    const msg = $("refreshMsg");
+    const ok = await verifyRefreshPassword(pw);
+    if (ok) {
+      msg.className = "refresh-msg ok";
+      msg.textContent = "Unlocked! Refreshing…";
+      setTimeout(() => { closeModal($("refreshModal")); doRefresh(); }, 500);
+    } else {
+      msg.className = "refresh-msg err";
+      msg.textContent = "Incorrect password.";
+      $("refreshPw").select();
+    }
+  }
+
   // ---------- Init ----------
   function pickAnswer() {
     const dayIdx = Math.max(0, dayIndexFromDate(new Date()));
@@ -476,6 +541,25 @@
     guessBtn.addEventListener("click", submitGuess);
     document.addEventListener("click", (e) => {
       if (!e.target.closest(".search-box")) { suggestionsEl.innerHTML = ""; suggestionIds = []; }
+    });
+
+    // Refresh password menu: open by typing the secret command "ap",
+    // or with Ctrl/Cmd + Alt + P.
+    $("refreshForm").addEventListener("submit", submitRefresh);
+    let seq = "", seqTimer = null;
+    document.addEventListener("keydown", (e) => {
+      const t = e.target;
+      const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
+      if (e.altKey && (e.ctrlKey || e.metaKey) && (e.key === "p" || e.key === "P")) {
+        e.preventDefault(); openRefresh(); return;
+      }
+      if (typing) return;
+      if (e.key && e.key.length === 1) {
+        seq = (seq + e.key.toLowerCase()).slice(-3);
+        clearTimeout(seqTimer);
+        seqTimer = setTimeout(() => { seq = ""; }, 1500);
+        if (seq.endsWith("ap")) { seq = ""; openRefresh(); }
+      }
     });
 
     $("howBtn").addEventListener("click", () => openModal("howModal"));
