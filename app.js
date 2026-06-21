@@ -6,6 +6,10 @@
   const MAX_GUESSES = 5;
   const EPOCH = new Date(2024, 0, 1);          // puzzle #1 = 2024-01-01 (local)
   const API_BASE = "";                          // same origin; leaderboard backend
+  // Static hosts (e.g. GitHub Pages) have no backend — use the estimated leaderboard
+  // directly instead of a doomed request that just logs a console error.
+  const HAS_BACKEND = !/\.github\.io$/.test(location.hostname) &&
+                      location.protocol !== "file:";
   const HEIGHT_ORDER = { Short: 0, Medium: 1, Tall: 2 };
   const TRAITS = [
     { key: "eyes",   label: "Eyes" },
@@ -281,6 +285,7 @@
       puzzleId, playerId: playerId(),
       won, guesses: won ? guesses : null, timeMs,
     };
+    if (!HAS_BACKEND) return simulateLeaderboard(won, guesses, timeMs);
     try {
       const res = await fetch(`${API_BASE}/api/score`, {
         method: "POST",
