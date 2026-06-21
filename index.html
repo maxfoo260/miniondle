@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffd000" />
+  <title>Miniondle — Guess the Minion</title>
+  <meta name="description" content="A daily Despicable Me guessing game. Guess the hidden Minion in 5 tries. A new puzzle every day." />
+  <meta property="og:title" content="Miniondle — A daily Minion guessing game" />
+  <meta property="og:description" content="Guess the hidden Minion in 5 tries. A new puzzle is available each day." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" aria-label="Miniondle">
+      <span class="brand-mark" aria-hidden="true">
+        <span class="goggle"><span class="pupil"></span></span>
+      </span>
+      <h1 class="brand-text">Mini<span class="brand-text-accent">ondle</span></h1>
+    </div>
+    <div class="topbar-actions">
+      <button id="howBtn" class="icon-btn" title="How to play" aria-label="How to play">?</button>
+      <button id="statsBtn" class="icon-btn" title="Statistics" aria-label="Statistics">📊</button>
+    </div>
+  </header>
+
+  <main class="game" id="game">
+    <p class="puzzle-line">Daily Puzzle <span id="puzzleNo">#—</span> · <span id="puzzleDate"></span></p>
+
+    <section class="portrait-wrap" aria-label="Today's mystery Minion">
+      <div class="portrait-frame">
+        <img id="portrait" class="portrait" alt="Mystery Minion to guess" />
+        <div id="portraitOverlay" class="portrait-overlay">?</div>
+      </div>
+      <p class="portrait-caption">Who's this Minion?</p>
+    </section>
+
+    <section class="guess-area">
+      <div class="search-box">
+        <input id="guessInput" type="text" autocomplete="off" autocapitalize="off"
+               autocorrect="off" spellcheck="false" placeholder="Type a Minion's name…"
+               aria-label="Type a Minion's name" />
+        <button id="guessBtn" class="guess-btn" disabled>Guess</button>
+        <ul id="suggestions" class="suggestions" role="listbox"></ul>
+      </div>
+      <p class="guesses-left">Guesses left: <span id="guessesLeft">5</span></p>
+    </section>
+
+    <section class="board-wrap">
+      <div class="board-head" aria-hidden="true">
+        <div class="col col-minion">Minion</div>
+        <div class="col">Eyes</div>
+        <div class="col">Height</div>
+        <div class="col">Hair</div>
+        <div class="col">Debut</div>
+      </div>
+      <div id="board" class="board"></div>
+    </section>
+  </main>
+
+  <!-- Result modal -->
+  <div id="resultModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close aria-label="Close">×</button>
+      <div id="resultBanner" class="result-banner"></div>
+      <h2 id="resultTitle" class="result-title"></h2>
+      <div class="result-reveal">
+        <img id="resultImg" class="result-img" alt="" />
+        <div class="result-reveal-info">
+          <div id="resultName" class="result-name"></div>
+          <div id="resultDebut" class="result-debut"></div>
+        </div>
+      </div>
+      <div class="result-stats">
+        <div class="rstat"><div class="rstat-num" id="rGuesses">—</div><div class="rstat-lbl">Guesses</div></div>
+        <div class="rstat"><div class="rstat-num" id="rTime">—</div><div class="rstat-lbl">Time</div></div>
+        <div class="rstat"><div class="rstat-num" id="rRank">—</div><div class="rstat-lbl">Rank today</div></div>
+      </div>
+      <div id="rankLine" class="rank-line"></div>
+      <button id="shareBtn" class="share-btn">Share result</button>
+      <p id="shareToast" class="share-toast hidden">Copied to clipboard!</p>
+      <p class="next-line">Next Minion in <span id="countdown">—</span></p>
+    </div>
+  </div>
+
+  <!-- How to play modal -->
+  <div id="howModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="howTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close aria-label="Close">×</button>
+      <h2 id="howTitle" class="modal-h">How to play</h2>
+      <p>A new mystery <strong>Minion</strong> appears every day. Study the photo at the top and figure out which named Minion it is.</p>
+      <ul class="how-list">
+        <li>You get <strong>5 guesses</strong>. Start typing a name and pick from the list.</li>
+        <li>Each guess reveals how it compares to the answer across <strong>Eyes</strong>, <strong>Height</strong>, <strong>Hair</strong> and <strong>Debut</strong>.</li>
+        <li><span class="legend swatch-correct">Green</span> means that trait matches the mystery Minion.</li>
+        <li><span class="legend swatch-wrong">Grey</span> means it doesn't match. Height shows ⬆ / ⬇ arrows toward the answer.</li>
+      </ul>
+      <p class="muted">Solve it in as few guesses and as little time as possible to climb the daily leaderboard!</p>
+    </div>
+  </div>
+
+  <!-- Stats modal -->
+  <div id="statsModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="statsTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close aria-label="Close">×</button>
+      <h2 id="statsTitle" class="modal-h">Statistics</h2>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num" id="sPlayed">0</div><div class="stat-lbl">Played</div></div>
+        <div class="stat"><div class="stat-num" id="sWin">0</div><div class="stat-lbl">Win %</div></div>
+        <div class="stat"><div class="stat-num" id="sStreak">0</div><div class="stat-lbl">Streak</div></div>
+        <div class="stat"><div class="stat-num" id="sMax">0</div><div class="stat-lbl">Max streak</div></div>
+      </div>
+      <h3 class="dist-h">Guess distribution</h3>
+      <div id="distChart" class="dist-chart"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Made for fun. Minions &amp; Despicable Me are © Universal/Illumination. Not affiliated.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
