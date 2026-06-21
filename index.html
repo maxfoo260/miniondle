@@ -26,7 +26,11 @@
   </header>
 
   <main class="game" id="game">
-    <p class="puzzle-line">Daily Puzzle <span id="puzzleNo">#—</span> · <span id="puzzleDate"></span></p>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-mode="daily" role="tab">Daily</button>
+      <button class="tab" data-mode="unlimited" role="tab">Unlimited</button>
+    </div>
+    <p class="puzzle-line" id="puzzleLine"></p>
 
     <section class="portrait-wrap" aria-label="Today's mystery Minion">
       <div class="portrait-frame">
@@ -69,17 +73,19 @@
         <div class="result-reveal-info">
           <div class="result-reveal-label">It was…</div>
           <div id="resultName" class="result-name"></div>
+          <div id="resultDebut" class="result-debut"></div>
         </div>
       </div>
       <div class="result-stats">
         <div class="rstat"><div class="rstat-num" id="rGuesses">—</div><div class="rstat-lbl">Guesses</div></div>
         <div class="rstat"><div class="rstat-num" id="rTime">—</div><div class="rstat-lbl">Time</div></div>
-        <div class="rstat"><div class="rstat-num" id="rRank">—</div><div class="rstat-lbl">Rank today</div></div>
+        <div class="rstat" id="rRankStat"><div class="rstat-num" id="rRank">—</div><div class="rstat-lbl">Rank today</div></div>
       </div>
       <div id="rankLine" class="rank-line"></div>
+      <button id="playAgainBtn" class="share-btn hidden">Play again ▸</button>
       <button id="shareBtn" class="share-btn">Share result</button>
       <p id="shareToast" class="share-toast hidden">Copied to clipboard!</p>
-      <p class="next-line">Next Minion in <span id="countdown">—</span></p>
+      <p class="next-line" id="nextLine">Next Minion in <span id="countdown">—</span></p>
     </div>
   </div>
 
@@ -96,6 +102,7 @@
         <li><span class="legend swatch-wrong">Grey</span> means it doesn't match.</li>
       </ul>
       <p class="muted">Solve it in as few guesses and as little time as possible to climb the daily leaderboard!</p>
+      <p><strong>Two modes:</strong> <strong>Daily</strong> is one shared puzzle per day with the leaderboard. <strong>Unlimited</strong> gives you a fresh random Minion every time — play as much as you want. When you win, you're told which film the Minion debuted in.</p>
     </div>
   </div>
 
@@ -107,7 +114,7 @@
       <div class="stat-row">
         <div class="stat"><div class="stat-num" id="sPlayed">0</div><div class="stat-lbl">Played</div></div>
         <div class="stat"><div class="stat-num" id="sWin">0</div><div class="stat-lbl">Win %</div></div>
-        <div class="stat"><div class="stat-num" id="sStreak">0</div><div class="stat-lbl">Streak</div></div>
+        <div class="stat"><div class="stat-num" id="sStreak">0</div><div class="stat-lbl" id="sStreakLbl">Streak</div></div>
         <div class="stat"><div class="stat-num" id="sMax">0</div><div class="stat-lbl">Max streak</div></div>
       </div>
       <h3 class="dist-h">Guess distribution</h3>

@@ -2,208 +2,390 @@
   {
     "id": "kevin",
     "name": "Kevin",
-    "img": "assets/minions/kevin.webp",
     "eyes": "Two",
     "height": "Tall",
     "hair": "Sprout",
-    "debut": "Minions (2015)"
+    "debut": "Minions (2015)",
+    "imgs": [
+      "assets/minions/kevin.webp"
+    ],
+    "img": "assets/minions/kevin.webp"
   },
   {
     "id": "stuart",
     "name": "Stuart",
-    "img": "assets/minions/stuart.webp",
     "eyes": "One",
     "height": "Medium",
     "hair": "Combed",
-    "debut": "Minions (2015)"
+    "debut": "Minions (2015)",
+    "imgs": [
+      "assets/minions/stuart.webp",
+      "assets/minions/stuart2.webp",
+      "assets/minions/stuart3.webp"
+    ],
+    "img": "assets/minions/stuart.webp"
   },
   {
     "id": "bob",
     "name": "Bob",
-    "img": "assets/minions/bob.webp",
     "eyes": "Two",
     "height": "Short",
     "hair": "Bald",
-    "debut": "Minions (2015)"
+    "debut": "Minions (2015)",
+    "imgs": [
+      "assets/minions/bob.webp",
+      "assets/minions/bob2.webp",
+      "assets/minions/bob3.webp"
+    ],
+    "img": "assets/minions/bob.webp"
   },
   {
     "id": "dave",
     "name": "Dave",
-    "img": "assets/minions/dave.webp",
     "eyes": "Two",
     "height": "Medium",
     "hair": "Combed",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/dave.webp"
+    ],
+    "img": "assets/minions/dave.webp"
   },
   {
     "id": "carl",
     "name": "Carl",
-    "img": "assets/minions/carl.webp",
     "eyes": "Two",
     "height": "Short",
     "hair": "Spiky",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/carl.webp"
+    ],
+    "img": "assets/minions/carl.webp"
   },
   {
     "id": "jerry",
     "name": "Jerry",
-    "img": "assets/minions/jerry.webp",
     "eyes": "Two",
     "height": "Medium",
     "hair": "Spiky",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/jerry.webp"
+    ],
+    "img": "assets/minions/jerry.webp"
   },
   {
     "id": "tim",
     "name": "Tim",
-    "img": "assets/minions/tim.webp",
     "eyes": "Two",
     "height": "Tall",
     "hair": "Sprout",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/tim.webp"
+    ],
+    "img": "assets/minions/tim.webp"
   },
   {
     "id": "mark",
     "name": "Mark",
-    "img": "assets/minions/mark.webp",
     "eyes": "Two",
     "height": "Medium",
     "hair": "Combed",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/mark.webp"
+    ],
+    "img": "assets/minions/mark.webp"
   },
   {
     "id": "phil",
     "name": "Phil",
-    "img": "assets/minions/phil.webp",
     "eyes": "One",
     "height": "Short",
     "hair": "Spiky",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/phil.webp"
+    ],
+    "img": "assets/minions/phil.webp"
   },
   {
     "id": "tom",
     "name": "Tom",
-    "img": "assets/minions/tom.webp",
     "eyes": "Two",
     "height": "Medium",
     "hair": "Spiky",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/tom.webp"
+    ],
+    "img": "assets/minions/tom.webp"
   },
   {
     "id": "norbert",
     "name": "Norbert",
-    "img": "assets/minions/norbert.webp",
     "eyes": "One",
     "height": "Short",
     "hair": "Sprout",
-    "debut": "Minions (2015)"
+    "debut": "Minions (2015)",
+    "imgs": [
+      "assets/minions/norbert.webp"
+    ],
+    "img": "assets/minions/norbert.webp"
   },
   {
     "id": "otto",
     "name": "Otto",
-    "img": "assets/minions/otto.webp",
     "eyes": "Two",
     "height": "Short",
     "hair": "Sprout",
-    "debut": "Minions: The Rise of Gru (2022)"
+    "debut": "Minions: The Rise of Gru (2022)",
+    "imgs": [
+      "assets/minions/otto.webp"
+    ],
+    "img": "assets/minions/otto.webp"
   },
   {
     "id": "mel",
     "name": "Mel",
-    "img": "assets/minions/mel.webp",
     "eyes": "One",
     "height": "Short",
     "hair": "Combed",
-    "debut": "Despicable Me 3 (2017)"
+    "debut": "Despicable Me 3 (2017)",
+    "imgs": [
+      "assets/minions/mel.webp",
+      "assets/minions/mel2.webp"
+    ],
+    "img": "assets/minions/mel.webp"
   },
   {
     "id": "donnie",
     "name": "Donnie",
-    "img": "assets/minions/donnie.webp",
     "eyes": "Two",
     "height": "Medium",
     "hair": "Combed",
-    "debut": "Despicable Me 2 (2013)"
+    "debut": "Despicable Me 2 (2013)",
+    "imgs": [
+      "assets/minions/donnie.webp"
+    ],
+    "img": "assets/minions/donnie.webp"
   },
   {
     "id": "lance",
     "name": "Lance",
-    "img": "assets/minions/lance.webp",
     "eyes": "One",
     "height": "Short",
     "hair": "Spiky",
-    "debut": "Minions (2015)"
+    "debut": "Minions (2015)",
+    "imgs": [
+      "assets/minions/lance.webp"
+    ],
+    "img": "assets/minions/lance.webp"
   },
   {
     "id": "steve",
     "name": "Steve",
-    "img": "assets/minions/steve.webp",
     "eyes": "One",
     "height": "Medium",
     "hair": "Combed",
-    "debut": "Despicable Me 2 (2013)"
+    "debut": "Despicable Me 2 (2013)",
+    "imgs": [
+      "assets/minions/steve.webp"
+    ],
+    "img": "assets/minions/steve.webp"
   },
   {
     "id": "frankie",
     "name": "Frankie",
-    "img": "assets/minions/frankie.webp",
     "eyes": "One",
     "height": "Medium",
     "hair": "Combed",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/frankie.webp"
+    ],
+    "img": "assets/minions/frankie.webp"
   },
   {
     "id": "john",
     "name": "John",
-    "img": "assets/minions/john.webp",
     "eyes": "One",
     "height": "Medium",
     "hair": "Combed",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/john.webp"
+    ],
+    "img": "assets/minions/john.webp"
   },
   {
     "id": "larry",
     "name": "Larry",
-    "img": "assets/minions/larry.webp",
     "eyes": "One",
     "height": "Short",
     "hair": "Combed",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/larry.webp"
+    ],
+    "img": "assets/minions/larry.webp"
   },
   {
     "id": "jorge",
     "name": "Jorge",
-    "img": "assets/minions/jorge.webp",
     "eyes": "Two",
     "height": "Short",
     "hair": "Buzz-cut",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/jorge.webp"
+    ],
+    "img": "assets/minions/jorge.webp"
   },
   {
     "id": "ed",
     "name": "Ed",
-    "img": "assets/minions/ed.webp",
     "eyes": "Two",
     "height": "Short",
     "hair": "Spiky",
-    "debut": "Minions (2015)"
+    "debut": "Minions (2015)",
+    "imgs": [
+      "assets/minions/ed.webp"
+    ],
+    "img": "assets/minions/ed.webp"
   },
   {
     "id": "paul",
     "name": "Paul",
-    "img": "assets/minions/paul.webp",
     "eyes": "Two",
     "height": "Tall",
     "hair": "Sprout",
-    "debut": "Despicable Me (2010)"
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/paul.webp"
+    ],
+    "img": "assets/minions/paul.webp"
   },
   {
     "id": "ken",
     "name": "Ken",
-    "img": "assets/minions/ken.webp",
     "eyes": "Two",
     "height": "Tall",
     "hair": "Sprout",
-    "debut": "Minions (2015)"
+    "debut": "Minions (2015)",
+    "imgs": [
+      "assets/minions/ken.webp"
+    ],
+    "img": "assets/minions/ken.webp"
+  },
+  {
+    "id": "tony",
+    "name": "Tony",
+    "eyes": "Two",
+    "height": "Medium",
+    "hair": "Combed",
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/tony.webp"
+    ],
+    "img": "assets/minions/tony.webp"
+  },
+  {
+    "id": "brian",
+    "name": "Brian",
+    "eyes": "Two",
+    "height": "Tall",
+    "hair": "Sprout",
+    "debut": "Despicable Me 4 (2024)",
+    "imgs": [
+      "assets/minions/brian.webp"
+    ],
+    "img": "assets/minions/brian.webp"
+  },
+  {
+    "id": "joe",
+    "name": "Joe",
+    "eyes": "Two",
+    "height": "Medium",
+    "hair": "Combed",
+    "debut": "Minions: The Rise of Gru (2022)",
+    "imgs": [
+      "assets/minions/joe.webp"
+    ],
+    "img": "assets/minions/joe.webp"
+  },
+  {
+    "id": "nick",
+    "name": "Nick",
+    "eyes": "Two",
+    "height": "Medium",
+    "hair": "Combed",
+    "debut": "Minions: The Rise of Gru (2022)",
+    "imgs": [
+      "assets/minions/nick.webp"
+    ],
+    "img": "assets/minions/nick.webp"
+  },
+  {
+    "id": "aaron",
+    "name": "Aaron",
+    "eyes": "Two",
+    "height": "Tall",
+    "hair": "Sprout",
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/aaron.webp"
+    ],
+    "img": "assets/minions/aaron.webp"
+  },
+  {
+    "id": "gary",
+    "name": "Gary",
+    "eyes": "One",
+    "height": "Medium",
+    "hair": "Buzz-cut",
+    "debut": "Despicable Me 2 (2013)",
+    "imgs": [
+      "assets/minions/gary.webp"
+    ],
+    "img": "assets/minions/gary.webp"
+  },
+  {
+    "id": "dexter",
+    "name": "Dexter",
+    "eyes": "One",
+    "height": "Medium",
+    "hair": "Buzz-cut",
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/dexter.webp"
+    ],
+    "img": "assets/minions/dexter.webp"
+  },
+  {
+    "id": "henry",
+    "name": "Henry",
+    "eyes": "Two",
+    "height": "Medium",
+    "hair": "Combed",
+    "debut": "Despicable Me (2010)",
+    "imgs": [
+      "assets/minions/henry.webp"
+    ],
+    "img": "assets/minions/henry.webp"
+  },
+  {
+    "id": "bill",
+    "name": "Bill",
+    "eyes": "Two",
+    "height": "Medium",
+    "hair": "Combed",
+    "debut": "Minions (2015)",
+    "imgs": [
+      "assets/minions/bill.webp"
+    ],
+    "img": "assets/minions/bill.webp"
   }
 ]

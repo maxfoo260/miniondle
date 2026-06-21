@@ -12,12 +12,16 @@ climb the **global daily leaderboard**.
 
 ## Features
 
+- **Two modes** — **Daily** (one shared puzzle per day, with the global leaderboard)
+  and **Unlimited** (a fresh random Minion every time, with "Play again").
 - **Daily puzzle** — the same Minion for everyone each day (deterministic, date-seeded).
-- **Photo at the top** — real Minion artwork sourced from the Despicable Me wiki and self-hosted.
+- **Photo at the top** — real Minion artwork sourced from the Despicable Me wiki and
+  self-hosted; many Minions have several photos so Unlimited mode stays fresh.
+- **Debut reveal** — when you finish, it tells you which film the Minion debuted in.
 - **5 guesses** shown as a Wordle-style grid of boxes (Eyes / Height / Hair) that
   turn green where the trait matches.
-- **Smart autocomplete** — start typing and pick from the top matches; you can only
-  submit a Minion that exists in the roster.
+- **Smart autocomplete** — start typing and pick from the top matches (each showing
+  its eyes/height/hair); you can only submit a Minion that exists in the roster.
 - **Win screen** with your time, guess count (X/5), and **rank on the global leaderboard**.
 - **Global backend leaderboard** — real ranking across all players (won → fewer
   guesses → faster time). Gracefully falls back to an estimated rank if the server
@@ -77,9 +81,7 @@ salted-hash check runs client-side (still only the hash, never the password).
 
 ## The roster
 
-23 named Minions across the films (Kevin, Stuart, Bob, Dave, Carl, Jerry, Tim, Mark,
-Phil, Tom, Norbert, Otto, Mel, Donnie, Lance, Steve, Frankie, John, Larry, Jorge, Ed,
-Paul, Ken). Traits (eyes / height / hair) were taken from each Minion's appearance
+32 named Minions across the films. Traits (eyes / height / hair) were taken from each Minion's appearance
 description on the [Despicable Me wiki](https://despicableme.fandom.com/wiki/Minions)
 and verified against the artwork.
 
