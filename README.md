@@ -67,7 +67,7 @@ attempt per puzzle. For a high-traffic deployment, swap the JSON file for a data
 
 There's a hidden command to reset the current day's puzzle and replay it:
 
-- Type the secret command **`ap`**, or press **Ctrl/Cmd + Alt + P**, to open the password menu.
+- Press the secret command **`d`**, or **Ctrl/Cmd + Alt + D**, to open the password menu.
 - Enter the password to wipe today's progress and start fresh.
 
 The password is **never stored in plaintext**. The backend keeps only a salted

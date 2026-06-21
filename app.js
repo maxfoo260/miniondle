@@ -543,22 +543,18 @@
       if (!e.target.closest(".search-box")) { suggestionsEl.innerHTML = ""; suggestionIds = []; }
     });
 
-    // Refresh password menu: open by typing the secret command "ap",
-    // or with Ctrl/Cmd + Alt + P.
+    // Refresh password menu: open by pressing the secret command "d",
+    // or with Ctrl/Cmd + Alt + D.
     $("refreshForm").addEventListener("submit", submitRefresh);
-    let seq = "", seqTimer = null;
     document.addEventListener("keydown", (e) => {
       const t = e.target;
       const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
-      if (e.altKey && (e.ctrlKey || e.metaKey) && (e.key === "p" || e.key === "P")) {
+      if (e.altKey && (e.ctrlKey || e.metaKey) && (e.key === "d" || e.key === "D")) {
         e.preventDefault(); openRefresh(); return;
       }
       if (typing) return;
-      if (e.key && e.key.length === 1) {
-        seq = (seq + e.key.toLowerCase()).slice(-3);
-        clearTimeout(seqTimer);
-        seqTimer = setTimeout(() => { seq = ""; }, 1500);
-        if (seq.endsWith("ap")) { seq = ""; openRefresh(); }
+      if ((e.key === "d" || e.key === "D") && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        openRefresh();
       }
     });
 
